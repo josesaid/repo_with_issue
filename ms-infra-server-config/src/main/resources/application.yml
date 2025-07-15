@@ -1,0 +1,29 @@
+server:
+    port: 8888
+spring:
+  application:
+    name: ms-infra-server-config
+# Configuracion Local
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          #searchLocations: file:///D:/AmbDesarrollo/Cursos/InTraining/CURS-000367-MSARQSpringCloud/02.-Microservices/02.-F3/ms-infra-data-config
+          searchLocations: file:///Users/josesaidolanogarcia/REPOSITORIOS/CURS-000367/02.-Microservices/02.-F3/ms-infra-data-config
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "health,refresh"
+    health:
+        readinessstate:
+            enabled: true
+        livenessstate:
+            enabled: true
+    endpoint:
+        health:
+            probes:
+                enabled: true

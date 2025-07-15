@@ -1,0 +1,58 @@
+mvn spring-boot:run
+
+mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8085
+mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8086
+
+rmdir target /s
+
+mvn package
+
+java -jar target/ms-negocio-gestion-productos-0.0.1-SNAPSHOT.jar
+
+docker build -t anovoa1975/ms-negocio-gestion-productos:0.0.1 . 
+
+docker network ls
+
+docker network create ms-network
+
+docker network disconnect bridge db-mysql-dev-ms-CURS-000367-MSARQSpringCloud
+
+docker network connect ms-network db-mysql-dev-ms-CURS-000367-MSARQSpringCloud
+
+docker network connect ms-network ms-negocio-gestion-productos-dev
+
+
+# docker run --name ms-negocio-gestion-productos-dev -e DB_SERVER=localhost:3307 -p8081:8081 --network=ms-network -d anovoa1975/ms-negocio-gestion-productos:0.0.1
+# docker run --name ms-negocio-gestion-productos-dev -e DB_SERVER=127.0.0.1:3307 -p8081:8081 --network=ms-network -d anovoa1975/ms-negocio-gestion-productos:0.0.1
+# docker run --name ms-negocio-gestion-productos-dev -e DB_SERVER=192.168.0.12:3307 -p8081:8081 --network=ms-network -d anovoa1975/ms-negocio-gestion-productos:0.0.1
+
+docker run --name ms-negocio-gestion-productos-dev -e DB_SERVER=db-mysql-dev-ms-CURS-000367-MSARQSpringCloud -p8081:8081 --network=ms-network -d anovoa1975/ms-negocio-gestion-productos:0.0.1
+
+
+# docker run --name ms-negocio-gestion-productos-dev -e DB_SERVER=db-mysql-dev-ms-CURS-000367-MSARQSpringCloud  -e DB_PORT=3308 -p8081:8081 --network=ms-network -d anovoa1975/ms-negocio-gestion-productos:0.0.1
+
+
+docker run --name ms-negocio-gestion-productos-qa -e DB_SERVER=db-mysql-dev-ms-CURS-000367-MSARQSpringCloud -p8082:8081 --network=ms-network -d anovoa1975/ms-negocio-gestion-productos:0.0.1
+
+docker push anovoa1975/ms-negocio-gestion-productos:0.0.1
+
+docker rmi [Image Id] emj. 700aea88d128
+
+# Eliminacion de contenedor
+docker rm  ID Container
+
+
+# Inspeccion de Contenedor
+
+docker inspect ID container
+
+# Logs de Contenedor
+
+docker logs ID container
+
+
+docker network create ms-network-qa
+
+docker run --name db-mysql-dev-ms-CURS-000367-MSARQSpringCloud-qa -p3306:3306 -e MYSQL_ROOT_PASSWORD=123456 --network=ms-network-qa -d mysql:9.3.0
+
+docker run --name ms-negocio-gestion-productos-qa -e DB_SERVER=db-mysql-dev-ms-CURS-000367-MSARQSpringCloud-qa -p8082:8081 --network=ms-network-qa -d anovoa1975/ms-negocio-gestion-productos:0.0.1

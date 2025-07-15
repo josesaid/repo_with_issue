@@ -1,0 +1,45 @@
+server:
+  port: 8082
+
+spring:
+  jpa: 
+    hibernate.ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_ms_clientes?createDatabaseIfNotExist=true
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+
+# Server Admin Client
+  boot:
+   admin:
+    client:
+      url: http://localhost:8890
+      instance:
+        management-base-url: http://localhost:${server.port}
+
+eureka:
+   client:
+      fetch-registry: true
+      serviceUrl:
+         defaultZone: http://localhost:8889/eureka
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "health,refresh"
+    health:
+        readinessstate:
+            enabled: true
+        livenessstate:
+            enabled: true
+    endpoint:
+        health:
+            probes:
+                enabled: true

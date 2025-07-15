@@ -1,0 +1,2 @@
+insert into tbl_productos(nombre, precio, sku, fecha_registro,estado) values ('Mimaskot adultos razas pequeña 3 kg',27.57,'800493','2025-05-29','1');
+insert into tbl_productos(nombre, precio, sku, fecha_registro,estado) values ('Mimaskot cachorros razas med-gran 22kg',140.50,'801735','2025-05-30','1');

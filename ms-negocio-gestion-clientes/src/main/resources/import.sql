@@ -1,0 +1,2 @@
+insert into tbl_clientes(razon_social, ruc,estado) values ('Comercial Mascotas','20544987301','1');
+insert into tbl_clientes(razon_social, ruc,estado) values ('Mimaskot Corporation','20455555551','1');

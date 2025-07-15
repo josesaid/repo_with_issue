@@ -1,0 +1,31 @@
+server:
+    port: 8888
+spring:
+  application:
+    name: ms-infra-server-config
+# Configuracion Cloud (git)
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/GalaxyTraining/CURS-000367.git
+          searchPaths: 02.-Microservices/02.-F3/ms-infra-data-config
+          username: ${USER_NAME}
+          password: ${USER_PASSWORD}
+          default-label: 02.-Sesion02
+          cloneOnStart: true
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "health,refresh"
+    health:
+        readinessstate:
+            enabled: true
+        livenessstate:
+            enabled: true
+    endpoint:
+        health:
+            probes:
+                enabled: true

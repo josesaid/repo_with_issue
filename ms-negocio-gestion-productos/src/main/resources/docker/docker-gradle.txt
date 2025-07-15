@@ -1,0 +1,27 @@
+gradle bootRun
+
+gradle bootRun --args='--server.port=8085'
+
+rmdir build /s
+
+gradle build -x test
+
+
+java -jar ms-negocio-gestion-productos-0.0.1-SNAPSHOT.jar
+
+docker build -t ms-negocio-gestion-productos-unico . 
+
+docker rmi [Image Id] emj. 700aea88d128
+
+
+# Eliminacion de contenedor
+docker rm  ID Container
+
+
+# Inspeccion de Contenedor
+
+docker inspect ID container
+
+# Logs de Contenedor
+
+docker logs ID container
